@@ -303,6 +303,9 @@
     // Pro Gallery items
     var pg = t.closest('[data-hook=item-container]');
     if (pg) {
+      // items that link to another website: let the real <a target=_blank> open it (never blocked as a pop-up)
+      var ext = pg.closest('a[href^="http"]');
+      if (ext) return;
       e.preventDefault();
       var owner = currentPopup && pg.closest('#POPUPS_ROOT') ? currentPopup : PAGE;
       var idx = +pg.getAttribute('data-idx');
